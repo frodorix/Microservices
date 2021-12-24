@@ -17,5 +17,9 @@ namespace Servicios.api.Libreria.Repository
             Expression<Func<TDocument,bool>> filterExpresion,
             PaginationEntity<TDocument> pagination  
             );
+
+        Task<PaginationEntity<TDocument>> PaginationByFilter(
+           PaginationEntity<TDocument> pagination
+           );
     }
 }

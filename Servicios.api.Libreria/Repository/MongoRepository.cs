@@ -87,5 +87,53 @@ namespace Servicios.api.Libreria.Repository
             return pagination;
 
         }
+
+        public async Task<PaginationEntity<TDocument>> PaginationByFilter(PaginationEntity<TDocument> pagination)
+        {
+            var sort = Builders<TDocument>.Sort.Ascending(pagination.Sort);
+            if (pagination.SortDirection == "desc")
+            {
+                sort = Builders<TDocument>.Sort.Descending(pagination.Sort);
+            }
+
+            ///Paginacion implementación logica
+            var totalDocuments = 0;
+            if (pagination.FilterValue == null)
+            {
+                pagination.Data = await _collection.Find(p => true)
+                    .Sort(sort)
+                    .Skip((pagination.Page - 1) * pagination.PageSize)
+                    .Limit(pagination.PageSize)
+                    .ToListAsync();
+                totalDocuments = (await _collection.Find(p=>true).ToListAsync()).Count();
+            }
+            else
+            {
+                var valueFilter = ".*" + pagination.FilterValue.Valor + ".*";
+                var filter = Builders<TDocument>.Filter.Regex(
+                    pagination.FilterValue.Propiedad, 
+                    new MongoDB.Bson.BsonRegularExpression(valueFilter,"i")
+                  );
+
+                pagination.Data = await _collection.Find(filter)
+                 .Sort(sort)
+                 .Skip((pagination.Page - 1) * pagination.PageSize)
+                 .Limit(pagination.PageSize)
+                 .ToListAsync();
+
+                totalDocuments = (await _collection.Find(filter).ToListAsync()).Count();
+            }
+
+         //   long totalDocuments = await _collection.CountDocumentsAsync(FilterDefinition<TDocument>.Empty);
+            var rounded = Math.Ceiling(totalDocuments /  Convert.ToDecimal( pagination.PageSize));
+            
+            var totalPages = Convert.ToInt32(rounded);
+
+            pagination.PageQuantity = totalPages;
+            pagination.TotalRows = Convert.ToInt32(totalDocuments);
+
+            return pagination;
+
+        }
     }
 }

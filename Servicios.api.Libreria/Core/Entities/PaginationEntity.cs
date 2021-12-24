@@ -7,9 +7,12 @@
         public string Sort { get; set; }
         public string SortDirection { get; set; }
         public string Filter { get; set; }  
+        public FilterValueClass FilterValue { get; set; }
 
         public int PageQuantity { get; set; }   
         public IEnumerable<TDocument> Data { get; set;}
+
+        public int TotalRows { get; set; }
 
     }
 }
