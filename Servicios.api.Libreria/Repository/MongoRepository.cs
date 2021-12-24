@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using Servicios.api.Libreria.Core;
 using Servicios.api.Libreria.Core.Entities;
+using System.Linq.Expressions;
 
 namespace Servicios.api.Libreria.Repository
 {
@@ -49,6 +50,15 @@ namespace Servicios.api.Libreria.Repository
 
             var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
             await _collection.FindOneAndDeleteAsync(filter);
+        }
+
+        public Task<PaginationEntity<TDocument>> PaginationBy(Expression<Func<TDocument, bool>> filterExpresion, PaginationEntity<TDocument> pagination)
+        {
+            var sort = Builders<TDocument>.Sort.Ascending(pagination.Sort);
+            if (pagination.SortDirection == "desc")
+            {
+                sort = Builders<TDocument>.Sort.Descending(pagination.Sort);
+            }
         }
     }
 }
