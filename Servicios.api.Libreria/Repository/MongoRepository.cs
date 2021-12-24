@@ -47,7 +47,7 @@ namespace Servicios.api.Libreria.Repository
         public async Task DeleteById(string id)
         {
 
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, Id);
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
             await _collection.FindOneAndDeleteAsync(filter);
         }
     }
