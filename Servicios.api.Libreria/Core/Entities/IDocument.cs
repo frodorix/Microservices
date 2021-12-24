@@ -8,7 +8,7 @@ namespace Servicios.api.Libreria.Core.Entities
 
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId Id { get; set; }
+        public string Id { get; set; }
 
         DateTime CreatedDate { get;  }
     }
