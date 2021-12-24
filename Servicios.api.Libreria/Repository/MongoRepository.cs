@@ -26,5 +26,29 @@ namespace Servicios.api.Libreria.Repository
         {
             return await _collection.Find(p=> true).ToListAsync();
         }
+
+        public async Task<TDocument> GetById(string id)
+        {
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
+            return await _collection.Find(filter).SingleOrDefaultAsync();
+        }
+
+        public async Task InsertDocument(TDocument document)
+        {
+            await _collection.InsertOneAsync(document);
+        }
+
+        public async Task UpdateDocument(TDocument document)
+        {
+           var filter = Builders<TDocument>.Filter.Eq(doc=> doc.Id, document.Id);
+           await _collection.FindOneAndReplaceAsync(filter, document);
+        }
+
+        public async Task DeleteById(string id)
+        {
+
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, Id);
+            await _collection.FindOneAndDeleteAsync(filter);
+        }
     }
 }
