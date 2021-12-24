@@ -17,7 +17,8 @@ namespace Servicios.api.Libreria.Repository
             _collection = db.GetCollection<TDocument>(GetCollectionName(typeof(TDocument)));
         }
 
-        private protected string GetCollectionName(Type documentType) {
+        private protected string GetCollectionName(Type documentType)
+        {
             return ((BsonCollectionAttribute)documentType
                 .GetCustomAttributes(typeof(BsonCollectionAttribute), true)
                 .FirstOrDefault())
@@ -25,7 +26,7 @@ namespace Servicios.api.Libreria.Repository
         }
         public async Task<IEnumerable<TDocument>> GetAll()
         {
-            return await _collection.Find(p=> true).ToListAsync();
+            return await _collection.Find(p => true).ToListAsync();
         }
 
         public async Task<TDocument> GetById(string id)
@@ -41,8 +42,8 @@ namespace Servicios.api.Libreria.Repository
 
         public async Task UpdateDocument(TDocument document)
         {
-           var filter = Builders<TDocument>.Filter.Eq(doc=> doc.Id, document.Id);
-           await _collection.FindOneAndReplaceAsync(filter, document);
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
+            await _collection.FindOneAndReplaceAsync(filter, document);
         }
 
         public async Task DeleteById(string id)
@@ -52,13 +53,39 @@ namespace Servicios.api.Libreria.Repository
             await _collection.FindOneAndDeleteAsync(filter);
         }
 
-        public Task<PaginationEntity<TDocument>> PaginationBy(Expression<Func<TDocument, bool>> filterExpresion, PaginationEntity<TDocument> pagination)
+        public async Task<PaginationEntity<TDocument>> PaginationBy(Expression<Func<TDocument, bool>> filterExpresion, PaginationEntity<TDocument> pagination)
         {
             var sort = Builders<TDocument>.Sort.Ascending(pagination.Sort);
             if (pagination.SortDirection == "desc")
             {
                 sort = Builders<TDocument>.Sort.Descending(pagination.Sort);
             }
+
+            ///Paginacion implementación logica
+            if (string.IsNullOrEmpty(pagination.Filter))
+            {
+                pagination.Data = await _collection.Find(p => true)
+                    .Sort(sort)
+                    .Skip((pagination.Page - 1) * pagination.PageSize)
+                    .Limit(pagination.PageSize)
+                    .ToListAsync();
+            }
+            else
+            {
+                pagination.Data = await _collection.Find(filterExpresion)
+                 .Sort(sort)
+                 .Skip((pagination.Page - 1) * pagination.PageSize)
+                 .Limit(pagination.PageSize)
+                 .ToListAsync();
+            }
+
+            long totalDocuments = await _collection.CountDocumentsAsync(FilterDefinition<TDocument>.Empty);
+            var totalPages = Convert.ToInt32( Math.Ceiling( Convert.ToDecimal( totalDocuments / pagination.PageSize )));
+
+            pagination.PageQuantity = totalPages;
+            
+            return pagination;
+
         }
     }
 }
