@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { LibroService } from '../services/libro.service';
 
 @Component({
   selector: 'app-libro',
@@ -9,11 +10,14 @@ export class LibroComponent implements OnInit {
   @Input() tituloLibro!: string;
   @Output() libroClicked = new EventEmitter();
 
-  constructor() {}
+  constructor(private libroService: LibroService) {
+
+  }
 
   ngOnInit(): void {}
 
   onClicked() {
-    this.libroClicked.emit();
+   // this.libroClicked.emit();
+   this.libroService.eliminarLibro(this.tituloLibro);
   }
 }

@@ -9,7 +9,7 @@ import { LibroService } from '../services/libro.service';
 })
 export class LibrosComponent implements OnInit, OnDestroy {
   libros: string[] = [];
-  private libroSubscription: Subscription ;
+  private libroSubscription!: Subscription;
   constructor(private librosService: LibroService) {}
 
   ngOnInit(): void {
