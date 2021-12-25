@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LibroService } from '../services/libro.service';
 
 @Component({
   selector: 'app-libros',
@@ -6,19 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./libros.component.css'],
 })
 export class LibrosComponent implements OnInit {
-  libros = ['Matematica 1', 'Calculo II ', 'Fisica'];
-  constructor() {}
+  libros : any;
+
+  constructor(private librosService: LibroService) {
+    this.libros = librosService.obtenerLibros();
+  }
 
   ngOnInit(): void {}
 
   eliminarLibro(libro: any) {
-    this.libros = this.libros.filter((p) => p !== libro);
+    // this.libros = this.libros.filter((p) => p !== libro);
   }
 
   guardarLibro(f: any) {
-     if(f.valid){
-      this.libros.push(f.value.nombreLibro);
-     }
-
+    if (f.valid) {
+      //this.libros.push(f.value.nombreLibro);
+    }
   }
 }
