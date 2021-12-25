@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { LibroService } from '../services/libro.service';
 
 @Component({
@@ -6,14 +7,22 @@ import { LibroService } from '../services/libro.service';
   templateUrl: './libros.component.html',
   styleUrls: ['./libros.component.css'],
 })
-export class LibrosComponent implements OnInit {
-  libros : any;
+export class LibrosComponent implements OnInit, OnDestroy {
+  libros: string[] = [];
+  private libroSubscription: Subscription ;
+  constructor(private librosService: LibroService) {}
 
-  constructor(private librosService: LibroService) {
-    this.libros = librosService.obtenerLibros();
+  ngOnInit(): void {
+    this.libros = this.librosService.obtenerLibros();
+    //subscribe to changes
+    this.librosService.librosSubject.subscribe((data: any) => {
+      this.libros = data;
+    });
   }
 
-  ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.libroSubscription.unsubscribe();
+  }
 
   eliminarLibro(libro: any) {
     // this.libros = this.libros.filter((p) => p !== libro);
@@ -21,7 +30,7 @@ export class LibrosComponent implements OnInit {
 
   guardarLibro(f: any) {
     if (f.valid) {
-      //this.libros.push(f.value.nombreLibro);
+      this.librosService.agregarLibro(f.value.nombreLibro);
     }
   }
 }
