@@ -14,4 +14,11 @@ export class LibrosComponent implements OnInit {
   eliminarLibro(libro: any) {
     this.libros = this.libros.filter((p) => p !== libro);
   }
+
+  guardarLibro(f: any) {
+     if(f.valid){
+      this.libros.push(f.value.nombreLibro);
+     }
+
+  }
 }
