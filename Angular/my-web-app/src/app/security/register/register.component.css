@@ -1,0 +1,27 @@
+#contenedor{
+  display: flex;
+  height: 700px;
+  width: 100%;
+  border:  1px solid blue;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.elemento{
+  width: 150px;
+  /* flex: 1; */
+  height: 150px;
+}
+
+#element1{
+  background-color: brown;
+}
+
+#element2{
+  background-color: red;
+  /* flex: 2; */
+}
+#element3{
+  background-color: purple;
+}

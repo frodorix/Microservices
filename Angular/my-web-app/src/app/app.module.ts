@@ -27,7 +27,7 @@ import { LoginComponent } from './security/login/login.component';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
 
   ],
   providers: [
