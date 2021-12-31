@@ -35,4 +35,9 @@ export class BarraComponent implements OnInit, OnDestroy {
   onMenuToggleDispatch() {
     this.menuToggle.emit();
   }
+
+
+  terminarSesion(){
+    this.seguridadServicio.cerrarSession();
+  }
 }

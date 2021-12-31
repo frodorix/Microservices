@@ -8,6 +8,7 @@
       <li *ngIf="!estadoUsuario"><a routerLink="/registrar">Registar</a></li>
       <li *ngIf="!estadoUsuario"><a routerLink="/login">Login</a></li>
       <li *ngIf="estadoUsuario"><a routerLink="/">Home</a></li>
+      <li *ngIf="estadoUsuario" (click)="terminarSesion()"><a routerLink="/">Salir</a></li>
     </ul>
   </div>
 </mat-toolbar>

@@ -44,6 +44,8 @@ export class SeguridadService {
   cerrarSession() {
     this.usuario = null;
     this.seguridadCambio.next(false);
+    //route to login when logout successfully
+    this.router.navigate(['/login']);
 
   }
   obtenerUsuario() {
