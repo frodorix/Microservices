@@ -4,7 +4,21 @@
     <p>Sidenav content</p>
   </mat-sidenav>
   <mat-sidenav-content>
-    <button (click)="menu.toggle()">Abre Menu</button>
-    <router-outlet></router-outlet>
+
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="menu.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Libro Market</span>
+      <div>
+        <a routerLink="/registrar" >Registar</a>
+        <a routerLink="/login" >Login</a>
+        <a routerLink="/" >Home</a>
+      </div>
+    </mat-toolbar>
+
+    <main>
+      <router-outlet></router-outlet>
+    </main>
   </mat-sidenav-content>
 </mat-sidenav-container>
