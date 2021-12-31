@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { LoginData } from './login-data-model';
 import { Usuario } from './usuario.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SeguridadService {
+  seguridadCambio = new Subject<boolean>();
   private usuario: Usuario|null =null;
 
   constructor() {}
@@ -19,6 +21,7 @@ export class SeguridadService {
       username: usr.username,
       password:usr.password
     };
+    this.seguridadCambio.next(true);
   }
   login(usr: LoginData) {
     this.usuario = {
@@ -29,9 +32,13 @@ export class SeguridadService {
       username: '',
       password:''
     };
+    this.seguridadCambio.next(true);
+
   }
   cerrarSession() {
     this.usuario = null;
+    this.seguridadCambio.next(false);
+
   }
   obtenerUsuario() {
     return { ...this.usuario };

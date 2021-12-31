@@ -1,19 +1,38 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  OnDestroy,
+} from '@angular/core';
+import { SeguridadService } from 'src/app/security/seguridad.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-barra',
   templateUrl: './barra.component.html',
-  styleUrls: ['./barra.component.css']
+  styleUrls: ['./barra.component.css'],
 })
-export class BarraComponent implements OnInit {
+export class BarraComponent implements OnInit, OnDestroy {
+  @Output() menuToggle = new EventEmitter();
+  estadoUsuario: boolean | undefined;
+  usuarioSubscription: Subscription | undefined;
 
-  @Output()  menuToggle= new EventEmitter();
-  constructor() { }
+  constructor(private seguridadServicio: SeguridadService) {}
 
-  ngOnInit(): void {
+  ngOnDestroy(): void {
+    this.usuarioSubscription?.unsubscribe();
   }
 
-  onMenuToggleDispatch(){
+  ngOnInit(): void {
+    this.usuarioSubscription = this.seguridadServicio.seguridadCambio.subscribe(
+      (status) => {
+        this.estadoUsuario = status;
+      }
+    );
+  }
+
+  onMenuToggleDispatch() {
     this.menuToggle.emit();
   }
 }
