@@ -1,4 +1,10 @@
-<h1>My Angular APP</h1>
-<a routerLink="/">Inicio</a>
-<a routerLink="/libros">Favorite Books</a>
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-container">
+  <router-outlet></router-outlet>
+  <mat-sidenav mode="side" #menu role="navigation">
+    <p>Sidenav content</p>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <button (click)="menu.toggle()">Abre Menu</button>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
