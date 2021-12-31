@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { appendFile } from 'fs';
-import { userInfo } from 'os';
 import { LoginData } from './login-data-model';
 import { Usuario } from './usuario.model';
 
@@ -8,7 +6,7 @@ import { Usuario } from './usuario.model';
   providedIn: 'root',
 })
 export class SeguridadService {
-  private usuario: Usuario;
+  private usuario: Usuario|null =null;
 
   constructor() {}
 
@@ -19,6 +17,7 @@ export class SeguridadService {
       apellidos: usr.apellidos,
       nombre: usr.nombre,
       username: usr.username,
+      password:usr.password
     };
   }
   login(usr: LoginData) {
@@ -28,6 +27,7 @@ export class SeguridadService {
       apellidos: '',
       nombre: '',
       username: '',
+      password:''
     };
   }
   cerrarSession() {
