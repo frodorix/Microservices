@@ -13,6 +13,8 @@ import { MaterialModule } from './material/material.module';
 import { RegisterComponent } from './security/register/register.component';
 import { LoginComponent } from './security/login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BarraComponent } from './navegacion/barra/barra.component';
+import { MenuListaComponent } from './navegacion/menu-lista/menu-lista.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     LibroComponent,
     InicioComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    BarraComponent,
+    MenuListaComponent
   ],
   imports: [
     BrowserModule,
