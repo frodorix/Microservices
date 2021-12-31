@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoginData } from './login-data-model';
 import { Usuario } from './usuario.model';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class SeguridadService {
   seguridadCambio = new Subject<boolean>();
   private usuario: Usuario|null =null;
 
-  constructor() {}
+  constructor(private router:Router) {}
 
   registrarUsuario(usr: Usuario) {
     this.usuario = {
@@ -22,6 +23,9 @@ export class SeguridadService {
       password:usr.password
     };
     this.seguridadCambio.next(true);
+
+    //route to home when register successfully
+    this.router.navigate(['/']);
   }
   login(usr: LoginData) {
     this.usuario = {
@@ -34,6 +38,8 @@ export class SeguridadService {
     };
     this.seguridadCambio.next(true);
 
+    //route to home when login successfully
+    this.router.navigate(['/']);
   }
   cerrarSession() {
     this.usuario = null;
