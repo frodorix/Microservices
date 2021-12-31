@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { RegisterComponent } from './security/register/register.component';
 import { LoginComponent } from './security/login/login.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { LoginComponent } from './security/login/login.component';
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FlexLayoutModule
 
   ],
   providers: [
