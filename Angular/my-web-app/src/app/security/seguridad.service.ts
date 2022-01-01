@@ -51,4 +51,8 @@ export class SeguridadService {
   obtenerUsuario() {
     return { ...this.usuario };
   }
+
+  onSesion(){
+    return this.usuario!=null;
+  }
 }
