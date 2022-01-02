@@ -20,7 +20,11 @@ export class AutoresComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    console.log(this.autoresService.obtenerAutores());
-    this.dataSource.data = this.autoresService.obtenerAutores();
+    this.autoresService.obtenerAutores();
+    this.autoresService.obtenerActualizarListener()
+    .subscribe((autores:Autor[])=>{
+      this.dataSource.data=autores;
+    });
+    //this.dataSource.data = this.autoresService.obtenerAutores();
   }
 }

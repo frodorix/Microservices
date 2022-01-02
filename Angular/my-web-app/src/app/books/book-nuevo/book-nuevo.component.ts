@@ -29,7 +29,7 @@ export class BookNuevoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.autores = this.autoresServices.obtenerAutores();
+  //  this.autores = this.autoresServices.obtenerAutores();
   }
 
   guardarLibro(form: NgForm) {
