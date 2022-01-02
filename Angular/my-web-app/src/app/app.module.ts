@@ -16,6 +16,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BarraComponent } from './navegacion/barra/barra.component';
 import { MenuListaComponent } from './navegacion/menu-lista/menu-lista.component';
 import { SeguridadService } from './security/seguridad.service';
+import { BooksComponent } from './books/books.component';
+import { BooksService } from './books/books.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { SeguridadService } from './security/seguridad.service';
     RegisterComponent,
     LoginComponent,
     BarraComponent,
-    MenuListaComponent
+    MenuListaComponent,
+    BooksComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +43,7 @@ import { SeguridadService } from './security/seguridad.service';
   providers: [
     LibroService,
     SeguridadService,
+    BooksService
   ],
   bootstrap: [AppComponent]
 })
