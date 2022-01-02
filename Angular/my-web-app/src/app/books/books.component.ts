@@ -23,7 +23,10 @@ export class BooksComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    console.log(this.dataSource);
     this.dataSource.data = this.booksService.obtenerLibros();
+  }
+
+  filtrar(filtro: any) {
+    this.dataSource.filter = filtro.value;
   }
 }
