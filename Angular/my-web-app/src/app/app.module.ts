@@ -20,6 +20,7 @@ import { BooksComponent } from './books/books.component';
 import { BooksService } from './books/books.service';
 import { BookNuevoComponent } from './books/book-nuevo/book-nuevo.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { AutoresComponent } from './autores/autores.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MenuListaComponent,
     BooksComponent,
     BookNuevoComponent,
+    AutoresComponent,
   ],
   imports: [
     BrowserModule,
