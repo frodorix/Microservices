@@ -5,6 +5,8 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { from } from 'rxjs';
+import { Autor } from 'src/app/autores/autor.model';
+import { AutoresService } from 'src/app/autores/autores.service';
 import { BooksService } from '../books.service';
 
 @Component({
@@ -18,9 +20,17 @@ export class BookNuevoComponent implements OnInit {
   selectAutorTexto: string = '';
   fechaPublicacion: string = '';
 
-  constructor(private booksService: BooksService , private dialogRef:MatDialog) {}
+  autores: Autor[] = [];
 
-  ngOnInit(): void {}
+  constructor(
+    private booksService: BooksService,
+    private dialogRef: MatDialog,
+    private autoresServices: AutoresService
+  ) {}
+
+  ngOnInit(): void {
+    this.autores = this.autoresServices.obtenerAutores();
+  }
 
   guardarLibro(form: NgForm) {
     if (form.valid) {
