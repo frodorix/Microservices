@@ -36,6 +36,8 @@ export class BooksComponent implements OnInit, AfterViewInit {
   }
 
   abrirDialogo() {
-    this.dialog.open(BookNuevoComponent);
+    this.dialog.open(BookNuevoComponent,{
+      width:'350px'
+    });
   }
 }

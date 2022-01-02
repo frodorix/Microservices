@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-book-nuevo',
   templateUrl: './book-nuevo.component.html',
-  styleUrls: ['./book-nuevo.component.css']
+  styleUrls: ['./book-nuevo.component.css'],
 })
 export class BookNuevoComponent implements OnInit {
 
-  constructor() { }
+  selectAutor:string | undefined;
 
-  ngOnInit(): void {
-  }
+  constructor() {}
 
+  ngOnInit(): void {}
+
+  guardarLibro(form:NgForm) {}
 }
