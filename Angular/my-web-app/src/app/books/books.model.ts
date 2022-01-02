@@ -3,6 +3,6 @@ export interface Books {
   titulo: string;
   descripcion: string;
   precio: number;
-  //fechaPublicacion: Date;
+  fechaPublicacion: Date|undefined;
   autor: string;
 }
