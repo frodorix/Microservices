@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatDatepicker } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-book-nuevo',
@@ -7,12 +8,12 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./book-nuevo.component.css'],
 })
 export class BookNuevoComponent implements OnInit {
-
-  selectAutor:string | undefined;
+  selectAutor: string | undefined;
+  @ViewChild(MatDatepicker) picker!: MatDatepicker<Date>;
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  guardarLibro(form:NgForm) {}
+  guardarLibro(form: NgForm) {}
 }
