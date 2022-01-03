@@ -1,4 +1,8 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Servicios.api.seguridad.Core.Entities;
 using Servicios.api.seguridad.Core.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +11,16 @@ builder.Services.AddDbContext<SeguridadContexto>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionDB"));
 });
+
+/// <summary>
+/// Core Identity Configuration
+/// </summary>
+var icBuilder = builder.Services.AddIdentityCore<Usuario>();
+var identityBuilder = new IdentityBuilder(icBuilder.UserType, icBuilder.Services);
+identityBuilder.AddEntityFrameworkStores<SeguridadContexto>();
+identityBuilder.AddSignInManager < SignInManager<Usuario>>();
+builder.Services.TryAddSingleton<ISystemClock,SystemClock>();
+///
 // Add services to the container.
 
 builder.Services.AddControllers();
