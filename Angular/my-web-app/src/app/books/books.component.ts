@@ -20,6 +20,8 @@ import { PaginationBooks } from './book-nuevo/pagination-books.model';
   styleUrls: ['./books.component.css'],
 })
 export class BooksComponent implements OnInit, AfterViewInit, OnDestroy {
+  timeout: any = null;
+
   bookData: Books[] = [];
   desplegarColumnas = ['titulo', 'descripcion', 'autor', 'precio'];
   dataSource = new MatTableDataSource<Books>();
@@ -35,7 +37,7 @@ export class BooksComponent implements OnInit, AfterViewInit, OnDestroy {
   paginaCombo = [1, 2, 5, 10];
   sort = 'titulo';
   sortDirection = 'asc';
-  filterValu = null;
+  filterValu :any= null;
 
   constructor(private booksService: BooksService, private dialog: MatDialog) {}
   ngOnDestroy(): void {
@@ -63,8 +65,26 @@ export class BooksComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  filtrar(filtro: any) {
-    this.dataSource.filter = filtro.value;
+  filtrar(event: any):void {
+    clearTimeout(this.timeout);
+    const $this = this;
+
+    this.timeout = setTimeout(() => {
+      if (event.keyCode != 13) {
+        const filterValueLocal = {
+          propiedad: 'titulo',
+          valor: event.target.value,
+        };
+        $this.filterValu = filterValueLocal;
+        $this.booksService.obtenerLibros(
+          $this.librosPorPagina,
+          $this.paginaActual,
+          $this.sort,
+          $this.sort,
+          filterValueLocal
+        );
+      }
+    }, 1000);
   }
 
   abrirDialogo() {
