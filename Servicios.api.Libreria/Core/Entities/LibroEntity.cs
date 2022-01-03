@@ -15,6 +15,6 @@ namespace Servicios.api.Libreria.Core.Entities
         public DateTime? FechaPublicacion   { get; set; }
 
         [BsonElement("autor")]
-        public AutorEntity Autor { get; set; }
+        public Autor Autor { get; set; }
     }
 }

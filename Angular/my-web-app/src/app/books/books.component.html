@@ -19,7 +19,7 @@
 
   <ng-container matColumnDef="autor">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Autor</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.autor }}</mat-cell>
+    <mat-cell *matCellDef="let element">{{ element.autor.nombreCompleto }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="precio">

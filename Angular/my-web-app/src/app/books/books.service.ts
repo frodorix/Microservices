@@ -43,10 +43,12 @@ export class BooksService {
     return this.bookPaginationSubject.asObservable();
   }
   guardarLibro(book: Books) {
+    console.log(book);
     this.httpClient
       .post(this.baseUrl + 'api/Libro', book)
       .subscribe((response) => {
-        this.booksSubject.next(null);
+        console.log(response);
+        this.booksSubject.next({});
       });
   }
 

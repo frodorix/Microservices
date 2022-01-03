@@ -1,6 +1,6 @@
-export interface Autor{
-  autorId:number;
-  nombre:string;
-  apellido:string;
-  gradoAcademico:string;
+export interface Autor {
+  id: string;
+  nombre: string;
+  apellido: string;
+  gradoAcademico: string;
 }
