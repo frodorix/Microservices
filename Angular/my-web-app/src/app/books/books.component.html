@@ -31,7 +31,7 @@
   <mat-row *matRowDef="let row; columns: desplegarColumnas"></mat-row>
 </mat-table>
 
-<mat-paginator [pageSize]="10" [pageSizeOptions]="[5,10,20]">
+<mat-paginator (page)="eventoPaginador($event)" #paginacion [pageSize]="librosPorPagina" [pageSizeOptions]="paginaCombo" [length]="totalLibros">
 
 </mat-paginator>
 
