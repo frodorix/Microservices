@@ -41,4 +41,25 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+
+//Init Core Identity Register first user
+using (var contexto = app.Services.CreateScope())
+{
+    var services = contexto.ServiceProvider;
+    try
+    {
+        var userManager = services.GetRequiredService<UserManager<Usuario>>();
+        var contextoEF = services.GetRequiredService<SeguridadContexto>();
+        SeguridadData.InsertarUsuario(contextoEF,userManager).Wait();
+    }
+    catch (Exception e)
+    {
+        var logging = services.GetRequiredService<ILogger<Program>>();
+        logging.LogError(e, "Error al registrar usuario");
+
+    }
+}
+
+
+
 app.Run();
