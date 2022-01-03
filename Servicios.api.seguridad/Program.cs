@@ -1,5 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Servicios.api.seguridad.Core.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<SeguridadContexto>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionDB"));
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
