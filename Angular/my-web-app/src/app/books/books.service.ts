@@ -43,8 +43,11 @@ export class BooksService {
     return this.bookPaginationSubject.asObservable();
   }
   guardarLibro(book: Books) {
-    this.booksList.push(book);
-    this.booksSubject.next(this.booksList);
+    this.httpClient
+      .post(this.baseUrl + 'api/Libro', book)
+      .subscribe((response) => {
+        this.booksSubject.next(null);
+      });
   }
 
   eliminarLibro(libroNombre: string) {
