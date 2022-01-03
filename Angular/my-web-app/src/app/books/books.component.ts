@@ -89,7 +89,18 @@ export class BooksComponent implements OnInit, AfterViewInit, OnDestroy {
       this.librosPorPagina,
       this.paginaActual,
       this.sort,
+      this.sortDirection,
+      this.filterValu
+    );
+  }
+  ordenarColumna(event: any) {
+    this.sort = event.active;
+    this.sortDirection = event.direction;
+    this.booksService.obtenerLibros(
+      this.librosPorPagina,
+      this.paginaActual,
       this.sort,
+      this.sortDirection,
       this.filterValu
     );
   }
