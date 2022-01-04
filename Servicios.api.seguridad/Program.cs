@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Servicios.api.seguridad.Core.Application;
 using Servicios.api.seguridad.Core.Entities;
 using Servicios.api.seguridad.Core.Persistence;
 
@@ -20,7 +21,11 @@ var identityBuilder = new IdentityBuilder(icBuilder.UserType, icBuilder.Services
 identityBuilder.AddEntityFrameworkStores<SeguridadContexto>();
 identityBuilder.AddSignInManager < SignInManager<Usuario>>();
 builder.Services.TryAddSingleton<ISystemClock,SystemClock>();
-///
+//
+
+//add Mappers
+builder.Services.AddAutoMapper(typeof(Register.UsuarioRegisterHandler));
+
 // Add services to the container.
 
 builder.Services.AddControllers();
