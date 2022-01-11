@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -32,6 +33,10 @@ builder.Services.AddAutoMapper(typeof(Register.UsuarioRegisterHandler));
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+//Validation
+builder.Services.AddFluentValidation(x=> x.RegisterValidatorsFromAssemblyContaining<Register>());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

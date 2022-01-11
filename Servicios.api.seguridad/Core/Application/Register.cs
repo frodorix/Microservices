@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,20 @@ namespace Servicios.api.seguridad.Core.Application
             public string Password { get; set; }
             public string Direccion { get; set; }
         }
+
+        public class UsuarioRegisterValidation:AbstractValidator<UsuarioRegisterCommand> {
+           public UsuarioRegisterValidation()
+            {
+                RuleFor(x => x.Nombre).NotEmpty();
+                RuleFor(x => x.Apellido).NotEmpty();
+                RuleFor(x => x.Username).NotEmpty();
+                RuleFor(x => x.Email).NotEmpty();
+                RuleFor(x => x.Password).NotEmpty();
+
+            }
+
+        }
+
         public class UsuarioRegisterHandler : IRequestHandler<UsuarioRegisterCommand, UsuarioDto>
         {
             private readonly SeguridadContexto _context;
