@@ -32,6 +32,7 @@ builder.Services.AddMediatR(typeof(Register.UsuarioRegisterCommand).Assembly);
 builder.Services.AddAutoMapper(typeof(Register.UsuarioRegisterHandler));
 
 builder.Services.AddScoped<IJwtGenerator,JwtGenerator>();
+builder.Services.AddScoped<IUsuarioSesion, UsuarioSesion>();
 
 // Add services to the container.
 

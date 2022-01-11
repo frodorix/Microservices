@@ -15,6 +15,7 @@ namespace Servicios.api.seguridad.Core.JwtLogic
              //   new Claim(JwtRegisteredClaimNames.NameId, usuario.Id),
                 new Claim("nombre", usuario.Nombre),
                 new Claim("apellido", usuario.Apellido),
+                new Claim("username", usuario.UserName),
 
             };
 
