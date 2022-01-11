@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Servicios.api.seguridad.Core.Application;
 using Servicios.api.seguridad.Core.Entities;
+using Servicios.api.seguridad.Core.JwtLogic;
 using Servicios.api.seguridad.Core.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,8 @@ builder.Services.TryAddSingleton<ISystemClock,SystemClock>();
 builder.Services.AddMediatR(typeof(Register.UsuarioRegisterCommand).Assembly);
 //add Mappers
 builder.Services.AddAutoMapper(typeof(Register.UsuarioRegisterHandler));
+
+builder.Services.AddScoped<IJwtGenerator,JwtGenerator>();
 
 // Add services to the container.
 

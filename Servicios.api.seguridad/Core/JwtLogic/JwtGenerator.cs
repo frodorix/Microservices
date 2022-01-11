@@ -12,7 +12,7 @@ namespace Servicios.api.seguridad.Core.JwtLogic
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.NameId, usuario.Id),
+             //   new Claim(JwtRegisteredClaimNames.NameId, usuario.Id),
                 new Claim("nombre", usuario.Nombre),
                 new Claim("apellido", usuario.Apellido),
 

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Servicios.api.seguridad.Core.Dto;
 using Servicios.api.seguridad.Core.Entities;
+using Servicios.api.seguridad.Core.JwtLogic;
 using Servicios.api.seguridad.Core.Persistence;
 
 namespace Servicios.api.seguridad.Core.Application
@@ -39,12 +40,14 @@ namespace Servicios.api.seguridad.Core.Application
             private readonly SeguridadContexto _context;
             private readonly UserManager<Usuario> _userManager;
             private readonly IMapper _mapper;
+            private readonly IJwtGenerator _jwtGenerator;
 
-            public UsuarioRegisterHandler(SeguridadContexto context, UserManager<Usuario> userManager, IMapper mapper)
+            public UsuarioRegisterHandler(SeguridadContexto context, UserManager<Usuario> userManager, IMapper mapper, IJwtGenerator jwtGenerator)
             {
                 this._context = context;
                 this._userManager = userManager;
                 this._mapper = mapper;
+                this._jwtGenerator = jwtGenerator; 
             }
             public async Task<UsuarioDto> Handle(UsuarioRegisterCommand request, CancellationToken cancellationToken)
             {
@@ -73,6 +76,7 @@ namespace Servicios.api.seguridad.Core.Application
                 if (resultado.Succeeded)
                 {
                     var usuarioDTO =_mapper.Map<Usuario, UsuarioDto>(usuario);
+                    usuarioDTO.Token = _jwtGenerator.GenerateJwtToken(usuario);
                     return usuarioDTO;
                 }
                 throw new Exception("No se pudo registrar el usuario");
