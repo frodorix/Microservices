@@ -22,5 +22,11 @@ namespace Servicios.api.seguridad.Controllers
         public async Task<ActionResult<UsuarioDto>> Registrar(Register.UsuarioRegisterCommand parametros) {
             return await _mediator.Send(parametros);
         }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<UsuarioDto>> Login(Login.UsuarioLiginCommand parametros)
+        {
+            return await _mediator.Send(parametros);
+        }
     }
 }
