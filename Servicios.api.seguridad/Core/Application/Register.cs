@@ -17,6 +17,7 @@ namespace Servicios.api.seguridad.Core.Application
             public string Username { set; get; }
             public string Email { get; set; }
             public string Password { get; set; }
+            public string Direccion { get; set; }
         }
         public class UsuarioRegisterHandler : IRequestHandler<UsuarioRegisterCommand, UsuarioDto>
         {
@@ -49,7 +50,8 @@ namespace Servicios.api.seguridad.Core.Application
                     Nombre = request.Nombre,
                     Apellido = request.Apellido,
                     Email = request.Email,
-                    UserName = request.Username
+                    UserName = request.Username,
+                    Direccion=request.Direccion,
                 };
 
                 var resultado = await _userManager.CreateAsync(usuario, request.Password);

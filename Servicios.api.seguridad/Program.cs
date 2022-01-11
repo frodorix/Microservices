@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,8 @@ identityBuilder.AddSignInManager < SignInManager<Usuario>>();
 builder.Services.TryAddSingleton<ISystemClock,SystemClock>();
 //
 
+//mediatR
+builder.Services.AddMediatR(typeof(Register.UsuarioRegisterCommand).Assembly);
 //add Mappers
 builder.Services.AddAutoMapper(typeof(Register.UsuarioRegisterHandler));
 
