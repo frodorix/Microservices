@@ -1,0 +1,17 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/LibreriaServicio/autorGenerico",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5045"
+        }
+      ],
+      "UpstreamPathTemplate": "/autorLista",
+      "UpstreamHttpMethod": [ "POST", "GET", "UPDATE", "DELETE" ]
+    }
+  ]
+
+}
