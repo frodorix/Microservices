@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Servicios.api.seguridad.Core.Application;
+using Servicios.api.seguridad.Core.Dto;
 using Servicios.api.seguridad.Core.Entities;
 using Servicios.api.seguridad.Core.JwtLogic;
 using Servicios.api.seguridad.Core.Persistence;
@@ -32,20 +33,21 @@ builder.Services.TryAddSingleton<ISystemClock,SystemClock>();
 //mediatR
 builder.Services.AddMediatR(typeof(Register.UsuarioRegisterCommand).Assembly);
 //add Mappers
-builder.Services.AddAutoMapper(typeof(Register.UsuarioRegisterHandler));
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 builder.Services.AddScoped<IJwtGenerator,JwtGenerator>();
 builder.Services.AddScoped<IUsuarioSesion, UsuarioSesion>();
 
 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperPorotoPassword2022$"));
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer( opt=>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer( opt=>
 {
     opt.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = key,
         ValidateAudience = true,
-        ValidateIssuer = false,//Test mode
+        ValidateIssuer = false,//Test mode =false
 
     };
 } );

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Servicios.api.seguridad.Core.Entities;
 
 namespace Servicios.api.seguridad.Core.Dto
 {
@@ -6,7 +7,7 @@ namespace Servicios.api.seguridad.Core.Dto
     {
         public MappingProfile()
         {
-            CreateMap<UsuarioDto, UsuarioDto>();
+            CreateMap<Usuario, UsuarioDto>();
         }
     }
 }
