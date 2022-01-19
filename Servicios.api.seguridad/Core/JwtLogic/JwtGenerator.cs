@@ -19,7 +19,7 @@ namespace Servicios.api.seguridad.Core.JwtLogic
 
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperPorotoPassword2022$"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperPorotoPassword2022$26283032"));
 
             var credential = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
